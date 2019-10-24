@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>模板引擎测试</title>
+</head>
+<body>
+
+  <table id="demo"></table>
+  
+  <script type="text/html" id="tmp">
+    {{each items}}
+      <tr>
+        <td>{{$value.name}}</td>
+        <td>{{$value.age}}</td>
+        <td>{{$value.gender}}</td>
+      </tr>
+    {{/each}}
+  </script>
+  <script src="./template-web.js"></script>
+  <script>
+    var item = [
+      {name: 'zhoubo', age: 23, gender: 'male'},
+      {name: 'huiyuan', age: 18, gender: 'female'},
+      {name: 'jojo', age: 15, gender: 'male'},
+    ]
+    // 必须把需要遍历的对象放在一个新的对象中，其 key 与模板中的遍历目标相同
+    // var obj = {name: 'zhoubo', age: 23, gender: 'male'}
+    var test = { items: item }
+    var html = template('tmp', test)
+    
+    var table = document.getElementById('demo')
+    table.innerHTML = html
+    
+  </script>
+</body>
+</html>

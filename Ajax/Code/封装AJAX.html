@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  
+</head>
+
+<body>
+  <script>
+
+    /* 
+    封装函数的套路
+      1. 直接写一个较为完善的案例
+      2. 放入一个没有形参的函数中
+      3. 逐个将需要传递的部分提取为形参
+      4. 优化用户体验
+    */
+    function myAjax(method, url, params, callback) {
+      var xhr = window.XMLHttpRequest ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP')
+
+      method = method.toUpperCase
+
+      if (typeof params === 'object') {
+        var tempArr = []
+        for (var key in params) {
+          tempArr.push(key + '=' + params[key])
+        }
+        params = tempArr.join('&')
+      }
+
+      if (method === 'GET') {
+        url += '?' + params
+        params = null
+      }
+      xhr.open(method, url)
+      if (method === 'POST') {
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      }
+      xhr.send(params)
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return
+        // console.log(xhr.responseText) 由于异步性，无法返回响应的数据让调用者使用
+        // 回调相当于由调用者委托封装者去处理数据
+        callback(xhr.responseText)
+      }
+    }
+  </script>
+</body>
+
+</html>

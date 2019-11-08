@@ -138,7 +138,7 @@ break continue
 
 ## 数组
 
-`foo.length = 0` 可以清空数组
+`arr.length = 0` 可以清空数组
 
 冒泡排序
 

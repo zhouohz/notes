@@ -66,7 +66,7 @@ hexo s
    npm install --save hexo-deployer-git
    ```
 
-   安装好之后，在 _config.yml 文件中配置 deploy 的 type 值
+   安装好之后，在 `_config.yml` 文件中配置 deploy 的 type 值
 
    ```json
    deploy:

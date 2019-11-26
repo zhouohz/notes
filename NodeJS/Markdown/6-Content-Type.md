@@ -37,3 +37,5 @@ response.setHeader('Content-Type', 'text/plain; charset=utf-8')
 在实际应用中，是根据请求的url标识，读取对应的文件内容，然后根据文件的类型设置好 Content-Type ，再响应给客户端
 
 服务器响应的不是资源文件本身，而是其中的内容，包括图片等资源，是转化为二进制数据响应给客户端的。浏览器其实也是不认识的，需要根据Content-Type进行对应的解析处理
+
+如果响应的是HTML页面，且页面中有设置 meta 的charset告诉了浏览器该用什么字符编码解析，那么，就不需要node再指定Content-Type

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello world!'
+      }
+    })
+
+    /**
+     * 
+     * At the core of Vue.js is a system that enables us to declaratively(声明式) render data to the DOM using straightforward(直截了当的) template syntax
+     * 
+     * el 通过 #id 关联 dom 元素. 当前 vue 实例只能管理此元素
+     *   - 不能将 vue 挂载到 html 和 body 元素上
+     * 
+     * data 为渲染到页面中的数据, 这些数据为响应式数据. 当 message 的值发生改变时, 页面会进行更新.
+     * 
+     * 访问 可以通过 app.$el app.$data 获取配置项. 其中 message 其实就是 app 的属性, 可以通过 app.message 获取
+     * 
+    */
+  </script>
+
+</body>
+</html>

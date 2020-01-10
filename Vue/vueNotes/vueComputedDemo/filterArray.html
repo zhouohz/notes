@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="filterdemo">
+    <input type="text" name="" id="" v-model="filterText">
+    <br>
+    all <input type="radio" name="gender" id="" value="" v-model="filterGender">
+    male <input type="radio" name="gender" id="" value="1" v-model="filterGender">
+    female <input type="radio" name="gender" id="" value="2" v-model="filterGender">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>GENDER</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in filterUser" v-bind:key="user.id">
+          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.gender}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+  
+    const vm = new Vue({
+      data: {
+        users: [
+          {id: 1, name: 'asdf', gender: '1'},
+          {id: 2, name: 'asdfgg', gender: '2'},
+          {id: 3, name: 'asdfhjg', gender: '1'},
+          {id: 4, name: 'asdfzc', gender: '1'},
+          {id: 5, name: 'asdfzxcv', gender: '2'}
+        ],
+        filterText: '',
+        filterGender: ''
+      },
+      computed: {
+        filterUser: {
+          get: function() {
+            return this.users.filter(user => {
+              return user.name.includes(this.filterText) && user.gender.includes(this.filterGender)
+            })
+          }
+        }
+      }
+    }).$mount("#filterdemo")
+
+  </script>
+</body>
+</html>

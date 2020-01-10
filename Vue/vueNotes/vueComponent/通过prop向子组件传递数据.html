@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./images/vuelogo.png" type="image/x-icon">
+  <title>Document</title>
+</head>
+<body>
+  <div id="components-demo">
+    <!-- 
+      我们可以使用 v-bind 来动态传递 prop.
+      这里绑定的 title 不是传统html标签的title属性, 而是, 在组件中注册的一个特性, 它的作用是接收向组件中传递的值
+      然后在组件实例内部, 像访问 data 中成员一样访问 title 的值.
+      也可以传递一个 post 对象进去, 这样, 在 template 中使用的时候, 就是 post.title 了. 这种方式更加的灵活简洁
+     -->
+    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('blog-post', {
+      props: ['title'],
+      template: `<h3>{{ title }}</h3>`
+    })
+
+    const vm = new Vue({
+      data: {
+        posts: [
+          {id: 1, title: 'first'},
+          {id: 2, title: 'second'},
+          {id: 3, title: 'third'},
+        ]
+      }
+    }).$mount('#components-demo')
+  </script>
+</body>
+</html>

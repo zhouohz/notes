@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./images/vuelogo.png" type="image/x-icon">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="components-demo">
+    {{ msg }} <br>
+    <!-- 
+      可以任意次的复用组件
+      每个组件维护自己的 count
+      因为, 每用一次就会有一个它的新实例被创建
+     -->
+    <button-counter message="hello component"></button-counter> 
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+
+    /**
+     * 定义一个名为 button-counter 的组件
+     * 组件是可复用的 Vue 实例，且有一个名称
+     * 我们可以在一个通过 new Vue() 创建的 Vue 根实例中把这个组件作为自定义元素使用
+     * 因为组件也算是Vue实例, 所以它们与 new Vue() 接收相同的选项, 如 data, computed, watch, methods 以及生命周期钩子等. 仅有的例外是 el 这样的根实例特有选项
+    */
+    Vue.component('button-counter', {
+      /**
+       * 组件的 data 选项必须是一个函数, 因此每个实例维护的被返回的对象都是独立的.
+       * 如果直接指向一个对象, 那么, 复用的所有组件实例都将维护这个对象, 就会互相影响.
+      */
+      data: function () {
+        return {
+          count: 3
+        }
+      },
+      /**
+       * prop 是你可以在组件上注册的一些自定义特性(即 html 标签中的属性)
+       * 当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。
+       * 组件默认可以拥有任意数量的 prop, 任何值都可以传递给任何 prop
+       * 我们能够在组件实例中访问这个值, 就像访问 data 中的值一样.(在 template 选项模板中访问)
+      */
+      props: ['message'],
+      /**
+       * 注意: 组件模板必须放在一个根元素内部, 就像 #app 一样, 需要一个盒子把组件包裹起来
+      */
+      template: '<div><h3>{{ message }}</h3><p>{{ count }}</p></div>'
+    })
+    const vm = new Vue({
+      data: {
+        msg: 'hello world'
+
+      }
+    }).$mount('#components-demo')
+  
+  </script>
+
+</body>
+</html>

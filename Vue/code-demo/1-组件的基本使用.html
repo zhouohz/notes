@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <title>Vue Demo</title>
+</head>
+<body>
+  <div id="demo">
+    <counter></counter>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('counter', {
+      template: `
+        <div>
+          <button v-on:click="handle">count: {{ count }}</button>
+          <helloWorld/>
+        </div>
+      `,
+      data () {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        handle () {
+          this.count++
+        }
+      },
+      components: {
+        helloWorld: {
+          template: `
+            <h3>hello world</h3>
+          `
+        }
+      }
+    })
+    const vm = new Vue({
+      
+    }).$mount('#demo')
+  </script>
+</body>
+</html>

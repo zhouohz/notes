@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <title>Vue Demo</title>
+</head>
+<body>
+  <div id="demo">
+    <one></one>
+    <two></two>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    /* 
+    兄弟组件传值以 eventHub 作为介质
+    const eventHub = new Vue()
+    one 组件监听自定义事件 eventHub.$on('eventname', callback)
+    two 组件触发自定义事件, 同时传递过去值 eventHub.$emit('eventname', value)
+    */
+    const eventHub = new Vue()
+    const one = {
+      template: `
+        <p>one component: {{ count }}</p>
+      `,
+      data () {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        handler (event) {
+
+        }
+      },
+      mounted () {
+        eventHub.$on("oneEvent", e => {
+          this.count += e
+        })
+      }
+    }
+    const two = {
+      template: `
+        <button @click="handler">two component</button>
+      `,
+      methods: {
+        handler () {
+          eventHub.$emit('oneEvent', 2)
+        }
+      }
+    }
+    const vm = new Vue({
+      components: {
+        one,
+        two
+      }
+    }).$mount('#demo')
+  </script>
+</body>
+</html>

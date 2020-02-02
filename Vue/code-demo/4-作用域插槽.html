@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <title>Vue Demo</title>
+  <style>
+    .current {
+      color: orange;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <fruits-list>
+      <template slot-scope="slotProps">
+        <span v-bind:class="{ current: slotProps.item.id === 3 }">{{ slotProps.item.name }}</span>
+      </template>
+    </fruits-list>
+  </div>
+
+  <template id="tpl">
+    <ul>
+      <li v-for="item in list" v-bind:key="item.id">
+        <slot v-bind:item="item">{{ item.name }}</slot>
+      </li>
+    </ul>
+  </template>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const fruitsList = {
+      template: '#tpl',
+      data () {
+        return {
+          list: [
+            {id: 1, name: 'apple'},
+            {id: 2, name: 'orange'},
+            {id: 3, name: 'lemon'},
+            {id: 4, name: 'mango'},
+          ]
+        }
+      }
+    }
+    const vm = new Vue({
+      components: {
+        fruitsList
+      }
+    }).$mount('#demo')
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+  <title>Vue Demo</title>
+</head>
+<body>
+  <div id="demo">
+    <cpn v-bind:msg="message" v-on:input="handle"></cpn>
+    <p>message: {{ message }}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const cpn = {
+      template: `
+        <input type="text" v-bind:value="msg" v-on:input="handleEmit"/>
+      `,
+      props: {
+        msg: String
+      },
+      methods: {
+        handleEmit (e) {
+          this.$emit('input', {
+            value: e.target.value
+          })
+        }
+      }
+    }
+    const vm = new Vue({
+      data: {
+        message: 'hello component'
+      },
+      methods: {
+        handle (e) {
+          this.message = e.value
+        }
+      },
+      components: {
+        cpn
+      }
+    }).$mount('#demo')
+  </script>
+</body>
+</html>

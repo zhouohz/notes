@@ -25,4 +25,3 @@ Array.prototype.mySlice = function () {
   return result
 }
 ```
-

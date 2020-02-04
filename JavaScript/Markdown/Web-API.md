@@ -52,6 +52,9 @@ id、src(运行时路径)、href、title、alt、className
 
 取消a标签的默认行为 => return false
 
+- e.preventDefault
+- e.stopPropagation
+
 innerHTML
 
 - 获取开始标签和结束标签中所有的内容
@@ -83,7 +86,7 @@ onfocus  onblur
 
 ### 自定义属性
 
-无法通过 elem.attr 的方式获取
+无法通过 elem.属性名 的方式获取
 
 - elem.getAttribute('foo')
 - elem.setAttribute('foo', 'bar')
@@ -133,7 +136,7 @@ onfocus  onblur
 
 通过事件对象 event 可以获取事件相关的数据和信息
 
-- 兼容性处理：event = event || window。event
+- 兼容性处理：event = event || window.event
 - 常见的属性：
   - event.eventPhase => 得到的是数字 1（捕获），2（目标），3（冒泡）
   - e.target => 真正的事件对象，老版本的IE为 e.srcElement

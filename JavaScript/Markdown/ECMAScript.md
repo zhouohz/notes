@@ -176,6 +176,8 @@ console.log(foo)
 
 ### arguments
 
+arguments.callee === 自己
+
 ### 匿名函数
 
 ## 作用域
@@ -202,9 +204,11 @@ console.log(foo)
 
 ### new 关键字的执行过程
 
+创建一个对象, this 指向它, 执行构造函数中的代码, 返回这个对象
+
 ### 遍历
 
-`for...in` 遍历对象
+`for...in` 遍历对象, 遍历项为 key, for of 遍历项为 value
 `delete foo.bar` 删除对象的属性
 
 ## 数据如何在内存中的存储

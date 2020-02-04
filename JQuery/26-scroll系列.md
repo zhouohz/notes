@@ -1,4 +1,4 @@
-## scrollTop()/scrillLeft()
+## scrollTop()/scrollLeft()
 
 页面有滚动条时，拖动滚动条就会有部分页面被隐藏，这两个方法可以获取被隐藏部分的长度
 
